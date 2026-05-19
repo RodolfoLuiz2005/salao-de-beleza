@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beauty Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <nav>
+      <h2>Beauty Studio</h2>
+
+      <ul>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#agendamento">Agendamento</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero-content">
+      <div>
+        <span class="tag">✨ Beleza & Bem-estar</span>
+
+        <h1>
+          Seu salão moderno com agendamento online
+        </h1>
+
+        <p>
+          Agende seus serviços com facilidade, rapidez e conforto.
+          Um salão moderno pensado para proporcionar a melhor experiência.
+        </p>
+
+        <a href="#agendamento" class="btn">
+          Agendar Agora
+        </a>
+      </div>
+
+      <div class="hero-card">
+        <h3>Horários da semana</h3>
+
+        <div class="schedule-grid" id="agendaGrid">
+          <div class="schedule-row" data-day="Segunda-feira">
+            <span class="day-label">Seg</span>
+            <div class="hours"><span data-time="08:00">08:00</span><span data-time="09:00">09:00</span><span data-time="10:00">10:00</span><span data-time="11:00">11:00</span><span data-time="13:00">13:00</span><span data-time="14:00">14:00</span><span data-time="15:00">15:00</span><span data-time="16:00">16:00</span><span data-time="17:00">17:00</span></div>
+          </div>
+          <div class="schedule-row" data-day="Terça-feira">
+            <span class="day-label">Ter</span>
+            <div class="hours"><span data-time="08:00">08:00</span><span data-time="09:00">09:00</span><span data-time="10:00">10:00</span><span data-time="11:00">11:00</span><span data-time="13:00">13:00</span><span data-time="14:00">14:00</span><span data-time="15:00">15:00</span><span data-time="16:00">16:00</span><span data-time="17:00">17:00</span></div>
+          </div>
+          <div class="schedule-row" data-day="Quarta-feira">
+            <span class="day-label">Qua</span>
+            <div class="hours"><span data-time="08:00">08:00</span><span data-time="09:00">09:00</span><span data-time="10:00">10:00</span><span data-time="11:00">11:00</span><span data-time="13:00">13:00</span><span data-time="14:00">14:00</span><span data-time="15:00">15:00</span><span data-time="16:00">16:00</span><span data-time="17:00">17:00</span></div>
+          </div>
+          <div class="schedule-row" data-day="Quinta-feira">
+            <span class="day-label">Qui</span>
+            <div class="hours"><span data-time="08:00">08:00</span><span data-time="09:00">09:00</span><span data-time="10:00">10:00</span><span data-time="11:00">11:00</span><span data-time="13:00">13:00</span><span data-time="14:00">14:00</span><span data-time="15:00">15:00</span><span data-time="16:00">16:00</span><span data-time="17:00">17:00</span></div>
+          </div>
+          <div class="schedule-row" data-day="Sexta-feira">
+            <span class="day-label">Sex</span>
+            <div class="hours"><span data-time="08:00">08:00</span><span data-time="09:00">09:00</span><span data-time="10:00">10:00</span><span data-time="11:00">11:00</span><span data-time="13:00">13:00</span><span data-time="14:00">14:00</span><span data-time="15:00">15:00</span><span data-time="16:00">16:00</span><span data-time="17:00">17:00</span></div>
+          </div>
+          <div class="schedule-row" data-day="Sábado">
+            <span class="day-label sat">Sáb</span>
+            <div class="hours"><span data-time="08:00">08:00</span><span data-time="09:00">09:00</span><span data-time="10:00">10:00</span><span data-time="11:00">11:00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="servicos" class="services">
+    <h2>Nossos Serviços</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>💇‍♀️ Corte Feminino</h3>
+        <p>Corte moderno e personalizado.</p>
+        <strong>R$ 80</strong>
+      </div>
+
+      <div class="card">
+        <h3>✨ Escova</h3>
+        <p>Finalização com brilho e elegância.</p>
+        <strong>R$ 50</strong>
+      </div>
+
+      <div class="card">
+        <h3>💅 Manicure</h3>
+        <p>Cuidados especiais para suas unhas.</p>
+        <strong>R$ 35</strong>
+      </div>
+
+      <div class="card">
+        <h3>🌸 Sobrancelha</h3>
+        <p>Design perfeito para seu rosto.</p>
+        <strong>R$ 25</strong>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="agendamento" class="booking">
+    <div class="booking-box">
+
+      <h2>Agende seu horário</h2>
+
+      <form id="bookingForm">
+
+        <input type="text" id="name" placeholder="Seu nome" required>
+
+        <input type="tel" id="phone" placeholder="Telefone" required>
+
+        <div class="services-selection">
+          <p class="time-label">Escolha os serviços:</p>
+          <div class="service-chips">
+            <label class="service-chip"><input type="checkbox" name="services" value="Corte Feminino"> Corte Feminino</label>
+            <label class="service-chip"><input type="checkbox" name="services" value="Escova"> Escova</label>
+            <label class="service-chip"><input type="checkbox" name="services" value="Manicure"> Manicure</label>
+            <label class="service-chip"><input type="checkbox" name="services" value="Sobrancelha"> Sobrancelha</label>
+          </div>
+        </div>
+
+        <div class="day-preference" id="dayPreference" style="display: none;">
+          <p class="time-label">Como deseja agendar?</p>
+          <div class="radio-group">
+            <label><input type="radio" name="scheduleType" value="Mesmo dia" checked> Tudo no mesmo dia</label>
+            <label><input type="radio" name="scheduleType" value="Dias separados"> Em dias separados</label>
+          </div>
+        </div>
+
+        <div id="singleDaySchedule">
+          <select id="day">
+            <option value="">Selecione o dia da semana</option>
+            <option value="Segunda-feira">Segunda-feira</option>
+            <option value="Terça-feira">Terça-feira</option>
+            <option value="Quarta-feira">Quarta-feira</option>
+            <option value="Quinta-feira">Quinta-feira</option>
+            <option value="Sexta-feira">Sexta-feira</option>
+            <option value="Sábado">Sábado (até 12h)</option>
+          </select>
+
+          <p class="time-label">Escolha o horário:</p>
+          <div class="time-slots" id="timeSlots">
+            <span class="slot" data-time="08:00">08:00</span>
+            <span class="slot" data-time="09:00">09:00</span>
+            <span class="slot" data-time="10:00">10:00</span>
+            <span class="slot" data-time="11:00">11:00</span>
+            <span class="slot weekday-only" data-time="13:00">13:00</span>
+            <span class="slot weekday-only" data-time="14:00">14:00</span>
+            <span class="slot weekday-only" data-time="15:00">15:00</span>
+            <span class="slot weekday-only" data-time="16:00">16:00</span>
+            <span class="slot weekday-only" data-time="17:00">17:00</span>
+          </div>
+          <input type="hidden" id="time">
+        </div>
+
+        <div id="separateDaysSchedule" style="display: none;">
+        </div>
+
+        <button type="submit">
+          Confirmar Agendamento
+        </button>
+
+      </form>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Beauty Studio - Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
