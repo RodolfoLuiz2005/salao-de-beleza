@@ -176,6 +176,17 @@ form.addEventListener("submit", function (e) {
   const isSeparate = document.querySelector('input[name="scheduleType"]:checked').value === "Dias separados" && checkedServices.length > 1;
   let scheduleDetails = "";
 
+  // Objeto para salvar no painel admin
+  const appointmentObj = {
+    id: Date.now(),
+    name: name,
+    phone: phone,
+    services: checkedServices,
+    isSeparate: isSeparate,
+    schedules: [],
+    createdAt: new Date().toISOString()
+  };
+
   if (isSeparate) {
     const rows = separateDaysSchedule.querySelectorAll('.service-schedule-row');
     let allFilled = true;
@@ -189,6 +200,7 @@ form.addEventListener("submit", function (e) {
         allFilled = false;
       } else {
         scheduleDetails += `- ${serviceName}: ${day} às ${time}\n`;
+        appointmentObj.schedules.push({ service: serviceName, day: day, time: time });
       }
     });
 
@@ -205,7 +217,13 @@ form.addEventListener("submit", function (e) {
       return;
     }
     scheduleDetails = `Todos os serviços em ${day} às ${time}\n`;
+    appointmentObj.schedules.push({ service: "Todos", day: day, time: time });
   }
+
+  // Salvar no localStorage
+  const existingAppointments = JSON.parse(localStorage.getItem('appointments')) || [];
+  existingAppointments.push(appointmentObj);
+  localStorage.setItem('appointments', JSON.stringify(existingAppointments));
 
   alert(
     `Agendamento confirmado!\n\n` +
@@ -216,7 +234,42 @@ form.addEventListener("submit", function (e) {
     scheduleDetails
   );
 
+  // Marcar como agendado no painel de horas
+  if (isSeparate) {
+    const rows = separateDaysSchedule.querySelectorAll('.service-schedule-row');
+    rows.forEach(row => {
+      const day = row.querySelector('.sep-day').value;
+      const time = row.querySelector('.sep-time').value;
+      if (day && time) {
+        const scheduleRow = agendaGrid.querySelector(`.schedule-row[data-day="${day}"]`);
+        if (scheduleRow) {
+          const slot = scheduleRow.querySelector(`.hours span[data-time="${time}"]`);
+          if (slot) slot.classList.add("booked");
+        }
+      }
+    });
+  } else {
+    const day = daySelect.value;
+    const time = timeInput.value;
+    if (day && time) {
+      const scheduleRow = agendaGrid.querySelector(`.schedule-row[data-day="${day}"]`);
+      if (scheduleRow) {
+        const slot = scheduleRow.querySelector(`.hours span[data-time="${time}"]`);
+        if (slot) slot.classList.add("booked");
+      }
+    }
+  }
+
   form.reset();
+
+  // Reseta o custom select
+  const dayDisplayReset = document.getElementById("dayDisplay");
+  if (dayDisplayReset) {
+    dayDisplayReset.innerHTML = "Selecione o dia da semana";
+    const customOptionsReset = document.getElementById("dayOptions").querySelectorAll("div");
+    customOptionsReset.forEach(opt => opt.classList.remove("same-as-selected"));
+  }
+
   slots.forEach(slot => {
     slot.classList.remove("selected");
     slot.style.pointerEvents = "none";
@@ -226,3 +279,41 @@ form.addEventListener("submit", function (e) {
   updateAgendaHighlight();
   updateScheduleView();
 });
+
+// Custom Select Logic
+const customDayDisplay = document.getElementById("dayDisplay");
+const customDayOptions = document.getElementById("dayOptions");
+const customDayInput = document.getElementById("day");
+
+if (customDayDisplay && customDayOptions && customDayInput) {
+  const customOptionsList = customDayOptions.querySelectorAll("div");
+
+  customDayDisplay.addEventListener("click", function(e) {
+    e.stopPropagation();
+    this.classList.toggle("select-arrow-active");
+    customDayOptions.classList.toggle("select-hide");
+  });
+
+  customOptionsList.forEach(option => {
+    option.addEventListener("click", function(e) {
+      e.stopPropagation();
+      customDayDisplay.innerHTML = this.innerHTML;
+      customDayInput.value = this.dataset.value;
+      
+      customOptionsList.forEach(opt => opt.classList.remove("same-as-selected"));
+      this.classList.add("same-as-selected");
+
+      customDayDisplay.classList.remove("select-arrow-active");
+      customDayOptions.classList.add("select-hide");
+
+      customDayInput.dispatchEvent(new Event("change"));
+    });
+  });
+
+  document.addEventListener("click", function(e) {
+    if (!e.target.closest('.custom-select')) {
+      customDayDisplay.classList.remove("select-arrow-active");
+      customDayOptions.classList.add("select-hide");
+    }
+  });
+}

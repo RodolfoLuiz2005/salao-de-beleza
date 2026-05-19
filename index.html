@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="style.css"/>
   <script defer src="script.js"></script>
 </head>
@@ -135,15 +136,18 @@
         </div>
 
         <div id="singleDaySchedule">
-          <select id="day">
-            <option value="">Selecione o dia da semana</option>
-            <option value="Segunda-feira">Segunda-feira</option>
-            <option value="Terça-feira">Terça-feira</option>
-            <option value="Quarta-feira">Quarta-feira</option>
-            <option value="Quinta-feira">Quinta-feira</option>
-            <option value="Sexta-feira">Sexta-feira</option>
-            <option value="Sábado">Sábado (até 12h)</option>
-          </select>
+          <div class="custom-select" id="customDaySelect">
+            <div class="select-selected" id="dayDisplay">Selecione o dia da semana</div>
+            <div class="select-items select-hide" id="dayOptions">
+              <div data-value="Segunda-feira">Segunda-feira</div>
+              <div data-value="Terça-feira">Terça-feira</div>
+              <div data-value="Quarta-feira">Quarta-feira</div>
+              <div data-value="Quinta-feira">Quinta-feira</div>
+              <div data-value="Sexta-feira">Sexta-feira</div>
+              <div data-value="Sábado">Sábado (até 12h)</div>
+            </div>
+            <input type="hidden" id="day" value="">
+          </div>
 
           <p class="time-label">Escolha o horário:</p>
           <div class="time-slots" id="timeSlots">
@@ -174,6 +178,12 @@
 
   <footer>
     <p>© 2026 Beauty Studio - Todos os direitos reservados.</p>
+    <a href="#">
+<button>
+  <i class="bi bi-instagram"></i>
+<i class="bi bi-whatsapp"></i>
+</button>
+    </a>
   </footer>
 
 </body>
